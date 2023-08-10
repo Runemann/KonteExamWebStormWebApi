@@ -8,7 +8,7 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const server = app.listen(process.env.port || 3000,
+const server = app.listen(PORT,
     () => {console.log(`Started server on http://localhost:${server.address().port}`);
 
     });
@@ -19,15 +19,14 @@ app.get("/api/login", (req, res) => {
         fullname: "Bossy",
     });
 });
-// Static files middleware
+
+const staticFolderPath = path.resolve("../client/dist");
+app.use(express.static(path.resolve(staticFolderPath)));
+
 app.use(express.static(path.resolve("../client/dist")));
+
 app.use((req, res, next) => {
-    const filePath = path.resolve("../client/dist", + req.path);
-    if(fs.existsSync(filePath)) {
-        res.sendFile(filePath);
-    } else {
-        next();
-    }
+   res.status(404).send("File not found");
 });
 
 

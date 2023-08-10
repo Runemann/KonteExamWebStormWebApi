@@ -2,9 +2,10 @@
   "name": "konteexamwebstormwebapi",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "start": "cd server && npm run start",
     "build": "npm run build:client && npm run build:server",
     "build:server": "cd server && npm run build",
     "build:client": "cd client && npm run build",
