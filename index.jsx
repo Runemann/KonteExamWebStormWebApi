@@ -8,6 +8,7 @@ function Home(){
     return <div>
         <h1> WorkSpace </h1>
         <ul>
+            <li><Link to={"/login"}>Login</Link></li>
             <li><Link to="/home"></Link></li>
             <li><Link to="/staff"></Link></li>
         </ul>
