@@ -19,6 +19,7 @@ function Application(){
     return <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home/>}></Route>
+            <Route path="/staff" element={<Staff/>}></Route>
         </Routes>
     </BrowserRouter>
 }
