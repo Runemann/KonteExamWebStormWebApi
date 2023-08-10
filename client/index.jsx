@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import {Application} from "./client/home.jsx";
-import Dropdown from "./client/components/dropdown.js";
-import {Login} from "./client/components/login.jsx";
+import {Application} from "./home.jsx";
+import Dropdown from "./components/dropdown.js";
+import {Login} from "./components/login.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("app"));
 

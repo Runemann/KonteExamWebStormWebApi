@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot} from "react-dom/client";
-import Home from "../index";
+import Home from "./index";
 import {act} from "react-dom/test-utils";
 
 describe("client test suite", () => {
