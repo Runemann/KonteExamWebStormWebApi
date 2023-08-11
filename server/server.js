@@ -1,19 +1,19 @@
 import express from 'express';
 import * as path from 'path';
 import dotenv from "dotenv";
-import * as fs from "fs";
-import { WorkspaceApi } from "./workspaceApi.js";
+
+
+// Load environment variables from .env file.
 dotenv.config();
 
 const app = express();
-
 const PORT = process.env.PORT || 3000;
 
-const server = app.listen(PORT,
-    () => {console.log(`Started server on http://localhost:${server.address().port}`);
+// Serve static files from the "dist" directory.
+const staticFolderPath = path.resolve("../dist");
+app.use(express.static(staticFolderPath));
 
-    });
-
+// API routes
 app.get("/api/login", (req, res) => {
     res.json({
         username: "admin",
@@ -21,16 +21,28 @@ app.get("/api/login", (req, res) => {
     });
 });
 
-const staticFolderPath = path.resolve("../client/dist");
-app.use(express.static(path.resolve(staticFolderPath)));
 
-app.use(express.static(path.resolve("../client/dist")));
-
-app.use("/api/staff", WorkspaceApi);
-
-app.use((req, res, next) => {
-   res.status(404).send("File not found");
+// Catch-all route
+app.get('*', (req, res) => {
+    res.sendFile(path.join(staticFolderPath, "index.html"));
 });
 
+// Global error handler - This catches any other errors.
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
+// Start the server
+const server = app.listen(PORT, () => {
+    console.log(`Started server on http://localhost:${server.address().port}`);
+});
 
+// Shut down the server on process termination.
+process.on('SIGINT', () => {
+    console.log('Shutting down server...');
+    server.close(() => {
+        console.log('Server shut down.');
+        process.exit(0);
+    });
+});
